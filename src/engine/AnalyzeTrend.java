@@ -1,14 +1,18 @@
 package engine;
 
 public class AnalyzeTrend {
+    private final String id;
     private final String countryName;
     private final String city;
-    private final int id;
 
-    public AnalyzeTrend(String countryName, String city, int id) {
+    public AnalyzeTrend(String id, String countryName, String city) {
+        this.id = id;
         this.countryName = countryName;
         this.city = city;
-        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getCountryName() {
@@ -19,7 +23,4 @@ public class AnalyzeTrend {
         return city;
     }
 
-    public int getId() {
-        return id;
-    }
 }
