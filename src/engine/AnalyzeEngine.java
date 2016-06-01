@@ -1,6 +1,8 @@
 package engine;
 import Utils.ConnexionUtilities;
 import Utils.DBUtilities;
+import Utils.QueryUtilities;
+
 import twitter4j.*;
 
 import java.sql.Connection;
@@ -72,14 +74,14 @@ public class AnalyzeEngine {
 		ResponseList<Location> availableTrends = twitter.getAvailableTrends();
 		List<AnalyzeTrend> extractedTrends = new ArrayList<>();
 		for (Location location : availableTrends) {
-			AnalyzeTrend trend = new AnalyzeTrend("T_" + location.getWoeid(), location.getCountryName(), location.getName());
+			AnalyzeTrend trend = new AnalyzeTrend(QueryUtilities.TREND_ID_PREFIX + location.getWoeid(), location.getCountryName(), location.getName());
 			extractedTrends.add(trend);
 		}
 		return extractedTrends;
 	}
 
 	private void computeTrends() {
-		fetchedTrends.stream().filter(t -> Integer.parseInt(t.getId().substring("T_".length())) != 1)
+		fetchedTrends.stream().filter(t -> Integer.parseInt(t.getId().substring(QueryUtilities.TREND_ID_PREFIX.length())) != 1)
 		.forEach(trend -> {
 			System.out.println("trendOF(" + trend.getCountryName() + " - " + trend.getCity() + "): " + "-> " + trend.getId());
 		});

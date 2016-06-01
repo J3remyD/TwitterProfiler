@@ -5,6 +5,10 @@ import java.util.StringJoiner;
 
 public class QueryUtilities {
 
+    public static final String TREND_ID_PREFIX = "T_";
+
+    private QueryUtilities(){}
+
     public static String withSingleQuotes(String str) {
         return "'" + str + "'";
     }
